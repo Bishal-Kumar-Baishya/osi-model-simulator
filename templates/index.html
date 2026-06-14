@@ -1,0 +1,31 @@
+<html>
+    <head>
+        <title>OSI Model Simulator</title>
+    </head>
+    <body>
+        <div class="container">
+            <!-- Left -->
+            <div class="columnSender">
+                <h2>User A (Sender)</h2>
+                <form id="sendForm">
+                    <input type="text" name="message" placeholder="Type message...">
+                    <button type="submit">Send</button>
+                </form>
+            </div>
+
+            <!-- Middle -->
+            <div class="columnProcessing">
+                <h2>Layer Progression</h2>
+                <div id="progressionContainer"></div>
+            </div>
+
+            <!-- Right -->
+            <div class="columnReceiver">
+                <h2>User B (Receiver)</h2>
+                <div id="receivedMessage"></div>
+            </div>
+        </div>
+
+        <script src="{{ url_for('static', filename='script.js') }}"></script>
+    </body>
+</html>
