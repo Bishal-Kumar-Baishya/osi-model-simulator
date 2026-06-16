@@ -15,14 +15,25 @@ document.getElementById("sendForm").addEventListener("submit", function(e){
     .then(response => response.json())
     .then(data => {
         console.log(data);
-        for (let layername in data){
+        for (let layername in data.encapsulation){
             let html = `<h3>${layername}</h3>`;
-            html += `<pre>${JSON.stringify(data[layername])}</pre>`;
+            html += `<pre>${JSON.stringify(data.encapsulation[layername])}</pre>`;
 
             progressionContainer.innerHTML += html;
         }
-        const finalMessage = data["ApplicationLayer"]["data"];
+        const finalMessage = data["encapsulation"]["ApplicationLayer"]["data"];
         receivedMessage.innerHTML = `<p>${finalMessage}</p>`;
+
+        for (let layername in data.decapsulation){
+            let html = `<h3>${layername}</h3>`;
+            if (typeof data.decapsulation[layername] === "string"){
+                html += `<p>${data.decapsulation[layername]}</p>`;
+            } else {
+                html += `<pre>${JSON.stringify(data.decapsulation[layername], null, 2)}</pre>`;
+            }
+
+            progressionContainer.innerHTML += html;
+        }
     })
     .catch(error => console.log("Error:", error))
 })

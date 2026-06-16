@@ -2,14 +2,15 @@ class SessionLayer:
     def __init__(self):
         self.session_id = "session_001"
 
-    def process(self, data):
-        data = data.copy()
-        
+    def process(self, data, direction):        
+        payload = {}
+
         # Encapsulation
-        if "session_id" not in data:
-            data["session_id"] = self.session_id
+        if direction == "encapsulation":
+            payload["payload"] = data
+            payload["session_id"] = self.session_id
+            return payload
 
         # Decapsulation
-        else:
-            data.pop("session_id")
-        return data
+        elif direction == "decapsulation":
+            return data["payload"]

@@ -15,10 +15,10 @@ A Flask-based simulator that demonstrates data encapsulation and decapsulation t
 - Type a message and click Send
 
 ## Features
-- Real-time layer-by-layer progression display
-- Hardcoded users (User A, User B) for testing
-- JSON-based data flow visualization
-- Bidirectional message flow (send/receive)
+- **Nested encapsulation** — each layer wraps previous layer's entire data
+- **Step-by-step visualization** — see data transformation at each layer
+- **Bidirectional flow** — encapsulation and decapsulation in single request
+- **JSON** — based data flow visualization
 
 ## Project Structure
 - `app.py` — Flask app with routes
@@ -28,7 +28,13 @@ A Flask-based simulator that demonstrates data encapsulation and decapsulation t
 - `static/script.js` — JavaScript for form handling
 
 ## How it works
-User A sends a message. The Coordinator passes it through 5 layers (Application → Session → Transport → Network → Physical), with each layer adding its own metadata. The progression is displayed in real-time. Then the data is decapsulated for User B.
+User A sends a message through encapsulation:
+1. Application Layer creates initial message structure
+2. Session Layer wraps it with session management
+3. Transport Layer adds port information
+4. Network Layer adds IP addressing
+5. Physical Layer converts to binary frame (simulated)
+The fully wrapped packet is then decapsulated at User B's side, unwrapping each layer in reverse order until the original message is revealed.
 
 ## Built with
 - Python 3
@@ -38,9 +44,15 @@ User A sends a message. The Coordinator passes it through 5 layers (Application 
 - Javascript
 - HTML
 
-## Future Improvements (Version 2)
-- Nested encapsulation (realistic protocol stacking)
-- CSS styling (3-column layout with better UI)
-- User authentication and dynamic users
-- Decapsulation animation
-- Message history and logging
+## Version History
+**V1:** Flat dictionary encapsulation, basic UI
+**V2:** Nested encapsulation, bidirectional flow, realistic protocol stacking
+
+## Future Improvements
+- CSS styling and responsive design
+- Firewall rule simulation
+- Intrusion detection system (IDS)
+- Packet inspection tool
+- Multiple protocol support (HTTP, DNS, SSH)
+- Message history and persistence
+- User authentication and multiple users

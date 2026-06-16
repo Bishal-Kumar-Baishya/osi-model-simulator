@@ -24,9 +24,18 @@ def index():
 def send():
     message = request.form.get("message")
 
-    progression = coordinator.send(message)
+    # Encapsulation
+    send_result = coordinator.send(message)
 
-    return jsonify(progression)
+    wrapped_packet = send_result["PhysicalLayer"]
+
+    # Decapsulation
+    receive_result = coordinator.receive(wrapped_packet)
+
+    return jsonify({
+        "encapsulation": send_result,
+        "decapsulation": receive_result
+    })
 
 if __name__ == "__main__":
     app.run(debug=True)

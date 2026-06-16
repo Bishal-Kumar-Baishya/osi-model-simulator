@@ -9,18 +9,18 @@ class TransportLayer:
                 "dns": 53
             }
 
-    def process(self, data):
-        data = data.copy()
+    def process(self, data, direction):
+        payload = {}
         
         # Encapsulation
-        if "src_port" not in data:
+        if direction == "encapsulation":
+            payload["payload"] = data
             src_port = random.randint(1024, 65535)
-            dst_port = self.app_port_mapping[data["app_type"]]
-            data["src_port"] = src_port
-            data["dst_port"] = dst_port
+            dst_port = self.app_port_mapping[data["payload"]["app_type"]]
+            payload["src_port"] = src_port
+            payload["dst_port"] = dst_port
+            return payload
         
         # Decapsulation
-        else:
-            data.pop("src_port")
-            data.pop("dst_port")
-        return data
+        elif direction == "decapsulation":
+            return data["payload"]

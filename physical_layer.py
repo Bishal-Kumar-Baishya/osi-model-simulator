@@ -1,13 +1,14 @@
 class PhysicalLayer:
-    def process(self, data):
-        data = data.copy()
+    def process(self, data, direction):
+        payload = {}
         
         # Encapsulation
-        if "frame" not in data:
-            result = data["data"].encode().hex()
-            data["frame"] = result
+        if direction == "encapsulation":
+            payload["payload"] = data
+            result = data["payload"]["payload"]["payload"]["data"].encode().hex()
+            payload["frame"] = result
+            return payload
         
         # Decapsulation
-        else:
-            data.pop("frame")
-        return data
+        elif direction == "decapsulation":
+            return data["payload"]
