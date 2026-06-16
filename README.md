@@ -45,8 +45,8 @@ The fully wrapped packet is then decapsulated at User B's side, unwrapping each 
 - HTML
 
 ## Version History
-**V1:** Flat dictionary encapsulation, basic UI
-**V2:** Nested encapsulation, bidirectional flow, realistic protocol stacking
+- **V1:** Flat dictionary encapsulation, basic UI
+- **V2:** Nested encapsulation, bidirectional flow, realistic protocol stacking
 
 ## Future Improvements
 - CSS styling and responsive design
